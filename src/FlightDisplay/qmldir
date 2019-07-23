@@ -16,3 +16,4 @@ PreFlightRCCheck            1.0 PreFlightRCCheck.qml
 PreFlightSensorsHealthCheck 1.0 PreFlightSensorsHealthCheck.qml
 PreFlightSoundCheck         1.0 PreFlightSoundCheck.qml
 QHInstruments               1.0 QHInstruments.qml
+QHProgressBar               1.0 QHProgressBar.qml

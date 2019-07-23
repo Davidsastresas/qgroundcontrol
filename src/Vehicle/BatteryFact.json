@@ -28,6 +28,13 @@
     "units":            "A"
 },
 {
+    "name":             "current_generator",
+    "shortDescription": "Generator current",
+    "type":             "int32",
+    "decimalPlaces":    0,
+    "units":            "A"
+},
+{
     "name":             "temperature",
     "shortDescription": "Temperature",
     "type":             "double",
@@ -60,5 +67,23 @@
     "enumStrings":      "Low Battery State Not Provided,Normal Operation,Low Battery State,Critical Battery State,Emergency Battery State,Battery Failed,Battery Unhealthy",
     "enumValues":       "0,1,2,3,4,5,6",
     "decimalPlaces":    0
+},
+{
+    "name":             "current_rotor",
+    "shortDescription": "Motors current",
+    "type":             "double",
+    "units":            "A"
+},
+{
+    "name":             "fuel_level",
+    "shortDescription": "Fuel level",
+    "type":             "double",
+    "units":            "ml"
+},
+{
+    "name":             "throttle_percentage",
+    "shortDescription": "Throttle",
+    "type":             "double",
+    "units":            "%"
 }
 ]

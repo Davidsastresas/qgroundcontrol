@@ -27,20 +27,47 @@ import QGroundControl.Vehicle       1.0
 
 ProgressBar {
 
-    //Common position parameters
-    Layout.preferredHeight: 10
-    Layout.preferredWidth: 125
+    id: qhprogressbar
+
+    implicitHeight: 10
+    implicitWidth: getProgressBarWidth()//Function defined in QHInstruments.qml
+
+    property var valueType: ["normal", "warning", "critical"]
                 
     //Values and conditions need to be added especifically
                 
 
     //Comon style for the background of the progress bars
     style: ProgressBarStyle{
+
         background: Rectangle {
-        radius: 1
-        color: "lightgrey"
-        implicitWidth: parent.Layout.preferredWidth
-        implicitHeight: parent.Layout.preferredHeight
+            radius: _radiusBars
+            color: qgcPal.colorGrey
+            implicitWidth: parent.Layout.preferredWidth
+            implicitHeight: parent.Layout.preferredHeight
+        }
+
+        progress: Rectangle {
+
+            radius: _radiusBars
+
+            color: {
+                if(qhprogressbar.valueType != null){
+                    if(qhprogressbar.valueType == "normal")
+                        return qgcPal.colorGreen
+                    if(qhprogressbar.valueType == "warning")
+                        return qgcPal.colorOrange
+                }
+                return qgcPal.colorRed
+            }
+
+            ColorAnimation on color {
+                running: qhprogressbar.valueType == "critical"
+                from: qgcPal.colorRed
+                to: qgcPal.colorGrey
+                duration: 1000
+                loops: Animation.Infinite
+            }
         }
     }
 }

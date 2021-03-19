@@ -11,47 +11,61 @@ import QtQuick 2.12
 
 import QGroundControl               1.0
 import QGroundControl.ScreenTools   1.0
+import QGroundControl.Controls      1.0
 
 //-------------------------------------------------------------------------
 //-- Toolbar Indicators
-Row {
-    id:                 indicatorRow
-    anchors.top:        parent.top
-    anchors.bottom:     parent.bottom
-    anchors.margins:    _toolIndicatorMargins
-    spacing:            ScreenTools.defaultFontPixelWidth * 1.5
-
-    property var  _activeVehicle:           QGroundControl.multiVehicleManager.activeVehicle
-    property real _toolIndicatorMargins:    ScreenTools.defaultFontPixelHeight * 0.66
-
-    Repeater {
-        id:     appRepeater
-        model:  QGroundControl.corePlugin.toolBarIndicators
-        Loader {
-            anchors.top:        parent.top
-            anchors.bottom:     parent.bottom
-            source:             modelData
-            visible:            item.showIndicator
+Item { 
+    Row {
+        id:                 indicatorRow
+        anchors.top:        parent.top
+        anchors.bottom:     parent.bottom
+        anchors.margins:    _toolIndicatorMargins
+        spacing:            ScreenTools.defaultFontPixelWidth * 1.5
+    
+        property var  _activeVehicle:           QGroundControl.multiVehicleManager.activeVehicle
+        property real _toolIndicatorMargins:    ScreenTools.defaultFontPixelHeight * 0.66
+    
+        Repeater {
+            id:     appRepeater
+            model:  QGroundControl.corePlugin.toolBarIndicators
+            Loader {
+                anchors.top:        parent.top
+                anchors.bottom:     parent.bottom
+                source:             modelData
+                visible:            item.showIndicator
+            }
+        }
+    
+        Repeater {
+            model: _activeVehicle ? _activeVehicle.toolIndicators : []
+            Loader {
+                anchors.top:        parent.top
+                anchors.bottom:     parent.bottom
+                source:             modelData
+                visible:            item.showIndicator
+            }
+        }
+    
+        Repeater {
+            model: _activeVehicle ? _activeVehicle.modeIndicators : []
+            Loader {
+                anchors.top:        parent.top
+                anchors.bottom:     parent.bottom
+                source:             modelData
+                visible:            item.showIndicator
+            }
         }
     }
-
-    Repeater {
-        model: _activeVehicle ? _activeVehicle.toolIndicators : []
-        Loader {
-            anchors.top:        parent.top
-            anchors.bottom:     parent.bottom
-            source:             modelData
-            visible:            item.showIndicator
-        }
-    }
-
-    Repeater {
-        model: _activeVehicle ? _activeVehicle.modeIndicators : []
-        Loader {
-            anchors.top:        parent.top
-            anchors.bottom:     parent.bottom
-            source:             modelData
-            visible:            item.showIndicator
-        }
+    
+    HorizontalFactValueGrid {
+        id:                     valueArea
+        anchors.margins:        ScreenTools.defaultFontPixelWidth * 0.7
+        anchors.leftMargin:     ScreenTools.defaultFontPixelWidth * 3
+        anchors.top:            parent.top
+        anchors.bottom:         parent.bottom
+        anchors.left:           indicatorRow.right
+        userSettingsGroup:      telemetryBarUserSettingsGroup
+        defaultSettingsGroup:   telemetryBarDefaultSettingsGroup
     }
 }

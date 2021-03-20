@@ -20,7 +20,7 @@ Rectangle {
     id:                 telemetryPanel
     height:             telemetryLayout.height + (_toolsMargin * 2)
     width:              telemetryLayout.width + (_toolsMargin * 2)
-    color:              qgcPal.window
+    color:              !QGroundControl.settingsManager.appSettings.hideFlyViewPanels.rawValue ? qgcPal.window : "transparent"
     radius:             ScreenTools.defaultFontPixelWidth / 2
 
     DeadMouseArea { anchors.fill: parent }
@@ -35,6 +35,7 @@ Rectangle {
             id:                     valueArea
             userSettingsGroup:      telemetryBarUserSettingsGroup
             defaultSettingsGroup:   telemetryBarDefaultSettingsGroup
+            visible:                !QGroundControl.settingsManager.appSettings.hideFlyViewPanels.rawValue
 
             QGCMouseArea {
                 anchors.fill:   parent

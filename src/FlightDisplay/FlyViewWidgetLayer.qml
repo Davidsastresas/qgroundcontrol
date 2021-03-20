@@ -113,7 +113,7 @@ Item {
         anchors.right:              parent.right
         width:                      _rightPanelWidth
         spacing:                    _toolsMargin
-        visible:                    QGroundControl.corePlugin.options.flyView.showInstrumentPanel && multiVehiclePanelSelector.showSingleVehiclePanel
+        visible:                    !QGroundControl.settingsManager.appSettings.hideFlyViewPanels.rawValue
         availableHeight:            parent.height - y - _toolsMargin
 
         property real rightInset: visible ? parent.width - x : 0
@@ -124,6 +124,7 @@ Item {
         anchors.margins:        _toolsMargin
         anchors.right:          parent.right
         width:                  _rightPanelWidth
+        visible:                !QGroundControl.settingsManager.appSettings.hideFlyViewPanels.rawValue
         state:                  _verticalCenter ? "verticalCenter" : "topAnchor"
         states: [
             State {

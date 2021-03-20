@@ -150,6 +150,14 @@ Rectangle {
                             }
 
                             FactCheckBox {
+                                text:       qsTr("Hide fly view Panels")
+                                visible:    true
+                                fact:       _hideFlyViewPanels
+
+                                property Fact _hideFlyViewPanels: QGroundControl.settingsManager.appSettings.hideFlyViewPanels
+                            }
+
+                            FactCheckBox {
                                 text:       qsTr("Use Vertical Instrument Panel")
                                 visible:    _alternateInstrumentPanel.visible
                                 fact:       _alternateInstrumentPanel

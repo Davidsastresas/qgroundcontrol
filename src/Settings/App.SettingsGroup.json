@@ -323,6 +323,12 @@
     "shortDesc":    "Use COMPONENT_INFORMATION query (beta)",
     "type":         "bool",
     "default":      false
+},
+{
+    "name":         "hideFlyViewPanels",
+    "shortDesc":    "Hide fly view panels",
+    "type":         "bool",
+    "default":      false
 }
 ]
 }

@@ -51,6 +51,11 @@
         <file alias="XDelete.svg">resources/XDelete.svg</file>
         <file alias="XDeleteBlack.svg">resources/XDeleteBlack.svg</file>
         <file alias="waypoint.svg">resources/waypoint.svg</file>
+        <file alias="AraceIcon.png">resources/Araceicon.png</file>
+        <file alias="AraceLogoDark.png">resources/AraceLogoDark.png</file>
+        <file alias="AraceIconCircle.png">resources/AraceiconCircle.png</file>
+        <file alias="AraceIconPlain.png">resources/Arace-Plain.png</file>
+        <file alias="AraceIconPlainStroke.png">resources/Arace-Plain-Stroke.png</file>
         <file>resources/icons/qgroundcontrol.ico</file>
     </qresource>
     <qresource prefix="/res/firmware">

@@ -59,7 +59,7 @@ ScreenToolsController::normalFontFamily() const
     if(langID == 6 /*Korean*/) {
         return QString("fonts/NanumGothic-Regular");
     } else {
-        return QString("opensans");
+        return QString("roboto");
     }
 }
 
@@ -71,7 +71,7 @@ ScreenToolsController::boldFontFamily() const
     if(langID == 6 /*Korean*/) {
         return QString("NanumGothic-Bold");
     } else {
-        return QString("opensans-demibold");
+        return QString("roboto-demibold");
     }
 }
 

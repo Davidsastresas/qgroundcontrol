@@ -1,31 +1,45 @@
-/****************************************************************************
- *
- * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
- *
- * QGroundControl is licensed according to the terms in the file
- * COPYING.md in the root of the source code directory.
- *
- ****************************************************************************/
-
-
-import QtQuick          2.3
+import QtQuick          2.12
+import QtQuick.Layouts  1.12
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs  1.2
 
-import QGroundControl                       1.0
-import QGroundControl.Controls              1.0
-import QGroundControl.ScreenTools           1.0
-import QGroundControl.Palette               1.0
+import QGroundControl                   1.0
+import QGroundControl.FactSystem        1.0
+import QGroundControl.FactControls      1.0
+import QGroundControl.ScreenTools       1.0
+import QGroundControl.SettingsManager   1.0
+import QGroundControl.Controls          1.0
+import QGroundControl.Palette           1.0
 
-Rectangle {
-    id:                 _linkRoot
-    color:              qgcPal.window
-    anchors.fill:       parent
-    anchors.margins:    ScreenTools.defaultFontPixelWidth
+FirstRunPrompt {
+    id: _linkRoot
+    title:      qsTr("Arace default link presets")
+    promptId:   QGroundControl.corePlugin.araceFirstRunLinksPromptId
 
+    property real   _margins:               ScreenTools.defaultFontPixelWidth
+    property var    _appSettings:           QGroundControl.settingsManager.appSettings
+    property real   _fieldWidth:            ScreenTools.defaultFontPixelWidth * 16
+    property real   _comboFieldWidth:       ScreenTools.defaultFontPixelWidth * 30
+    property real   _labelWidth:            ScreenTools.defaultFontPixelWidth * 20
+    property Fact   _appFontPointSize:      QGroundControl.settingsManager.appSettings.appFontPointSize
+    width: _fieldWidth * 4
+    height: ScreenTools.defaultFontPixelHeight * 30
+
+    property var startupConfig
     property var _currentSelection: null
     property int _firstColumn:      ScreenTools.defaultFontPixelWidth * 12
     property int _secondColumn:     ScreenTools.defaultFontPixelWidth * 30
+
+    Component.onCompleted: {
+        if ( QGroundControl.linkManager.linkConfigurations.count != 1 ) { //
+            return
+        }
+        startupConfig = QGroundControl.linkManager.createConfiguration(1, "ARACE SIRIN HD-LINK") // 1 is udp
+        startupConfig.autoConnect = true
+        startupConfig.localPort = "14551"
+        QGroundControl.linkManager.endCreateConfiguration(startupConfig)
+        startupConfig = null
+    }
 
     QGCPalette {
         id:                 qgcPal
@@ -44,6 +58,7 @@ Rectangle {
     }
 
     QGCFlickable {
+        id: _flickable
         clip:               true
         anchors.top:        parent.top
         width:              parent.width
@@ -117,11 +132,6 @@ Rectangle {
             onClicked: {
                 _linkRoot.openCommSettings(null)
             }
-        }
-        QGCButton {
-            text:       qsTr("Connect")
-            enabled:    _currentSelection && !_currentSelection.link
-            onClicked:  QGroundControl.linkManager.createConnectedLink(_currentSelection)
         }
         QGCButton {
             text:       qsTr("Disconnect")
@@ -278,8 +288,6 @@ Rectangle {
                                             QGroundControl.linkManager.cancelConfigurationEditing(editConfig)
                                             // Create new link configuration
                                             editConfig = QGroundControl.linkManager.createConfiguration(index, name)
-                                            console.log(index)
-                                            console.log(name)
                                             // Load appropriate configuration panel
                                             linkSettingLoader.source  = editConfig.settingsURL
                                             linkSettingLoader.visible = true

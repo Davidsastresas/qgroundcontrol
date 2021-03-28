@@ -9,7 +9,7 @@
     "type":             "uint32",
     "enumStrings":      "ArduPilot,PX4 Pro,Mavlink Generic",
     "enumValues":       "3,12,0",
-    "default":     12
+    "default":     3
 },
 {
     "name":             "offlineEditingVehicleClass",
@@ -153,16 +153,16 @@
     "units":                "pt",
     "min":                  6,
     "max":                  48,
-    "default":         0
+    "default":        8
 },
 {
     "name":             "indoorPalette",
     "shortDesc": "Application color scheme",
     "longDesc":  "The color scheme for the user interface.",
     "type":             "uint32",
-    "enumStrings":      "Indoor,Outdoor",
+    "enumStrings":      "Outdoor, Indoor",
     "enumValues":       "1,0",
-    "default":     0
+    "default":     1
 },
 {
     "name":             "showLargeCompass",
@@ -275,7 +275,7 @@
     "type":             "uint32",
     "enumStrings":      "System,български (Bulgarian),中文 (Chinese),Nederlands (Dutch),English,Suomi (Finnish),Français (French),Deutsche (German),Ελληνικά (Greek), עברית (Hebrew),Italiano (Italian),日本人 (Japanese),한국어 (Korean),Norsk (Norwegian),Polskie (Polish),Português (Portuguese),Pусский (Russian),Español (Spanish),Svenska (Swedish),Türk (Turkish),Azerbaijani (Azerbaijani)",
     "enumValues":       "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-    "default":     0
+    "default":     4
 },
 {
     "name":             "disableAllPersistence",
@@ -328,7 +328,7 @@
     "name":         "hideFlyViewPanels",
     "shortDesc":    "Hide fly view panels",
     "type":         "bool",
-    "default":      false
+    "default":      true
 }
 ]
 }

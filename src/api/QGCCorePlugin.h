@@ -59,6 +59,9 @@ public:
     Q_PROPERTY(QVariantList         toolBarIndicators               READ toolBarIndicators                              NOTIFY toolBarIndicatorsChanged)
     Q_PROPERTY(int                  unitsFirstRunPromptId           MEMBER unitsFirstRunPromptId                        CONSTANT)
     Q_PROPERTY(int                  offlineVehicleFirstRunPromptId  MEMBER offlineVehicleFirstRunPromptId               CONSTANT)
+    Q_PROPERTY(int                  araceFirstRunPromptId           MEMBER araceFirstRunPromptId                        CONSTANT)
+    Q_PROPERTY(int                  araceFirstRunVideoPromptId      MEMBER araceFirstRunVideoPromptId                   CONSTANT)
+    Q_PROPERTY(int                  araceFirstRunLinksPromptId      MEMBER araceFirstRunLinksPromptId                   CONSTANT)
 
     Q_INVOKABLE bool guidedActionsControllerLogging() const;
 
@@ -196,6 +199,9 @@ public:
 
     // Custom builds can start there first run prompt ids from here
     static const int firstRunPromptIdsFirstCustomId = 10000;
+    static const int araceFirstRunPromptId =          10001;
+    static const int araceFirstRunVideoPromptId =     10002;
+    static const int araceFirstRunLinksPromptId =     10003;
 
 signals:
     void settingsPagesChanged       ();

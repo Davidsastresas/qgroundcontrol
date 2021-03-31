@@ -19,7 +19,7 @@ import QGroundControl.ScreenTools   1.0
 
 Button {
     id:                 button
-    height:             ScreenTools.defaultFontPixelHeight * 3
+    height:             parent.height
     leftPadding:        _horizontalMargin
     rightPadding:       _horizontalMargin
     checkable:          false
@@ -40,7 +40,7 @@ Button {
         anchors.verticalCenter: button.verticalCenter
         QGCColoredImage {
             id:                     _icon
-            height:                 ScreenTools.defaultFontPixelHeight * 2
+            height:                 parent.height
             width:                  height
             sourceSize.height:      parent.height
             fillMode:               Image.PreserveAspectFit

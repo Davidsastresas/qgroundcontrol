@@ -276,6 +276,11 @@ void LinkManager::saveLinkConfigurationList()
 
 void LinkManager::loadLinkConfigurationList()
 {
+    // this is for arace only, preventing the first run to duplicate links
+    if (_prevent_load_links_from_config) {
+        return;
+    }
+
     QSettings settings;
     // Is the group even there?
     if(settings.contains(LinkConfiguration::settingsRoot() + "/count")) {

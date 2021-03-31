@@ -293,16 +293,11 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSet
 {
     HorizontalFactValueGrid factValueGrid(defaultSettingsGroup);
 
-    bool        includeFWValues = factValueGrid.vehicleClass() == QGCMAVLink::VehicleClassFixedWing || factValueGrid.vehicleClass() == QGCMAVLink::VehicleClassVTOL || factValueGrid.vehicleClass() == QGCMAVLink::VehicleClassAirship;
-
     factValueGrid.setFontSize(FactValueGrid::LargeFontSize);
 
     factValueGrid.appendColumn();
     factValueGrid.appendColumn();
-    factValueGrid.appendColumn();
-    if (includeFWValues) {
-        factValueGrid.appendColumn();
-    }
+    factValueGrid.appendRow();
     factValueGrid.appendRow();
 
     int                 rowIndex    = 0;
@@ -316,7 +311,13 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSet
 
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "DistanceToHome");
-    value->setIcon("bookmark copy 3.svg");
+    value->setIcon("home.svg");
+    value->setText(value->fact()->shortDescription());
+    value->setShowUnits(true);
+
+    value = column->value<InstrumentValueData*>(rowIndex++);
+    value->setFact("Vehicle", "FlightDistance");
+    value->setIcon("swap.svg");
     value->setText(value->fact()->shortDescription());
     value->setShowUnits(true);
 
@@ -324,47 +325,21 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSet
     column      = factValueGrid.columns()->value<QmlObjectListModel*>(1);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
-    value->setFact("Vehicle", "ClimbRate");
-    value->setIcon("arrow-simple-up.svg");
-    value->setText(value->fact()->shortDescription());
+    value->setFact("Battery0", "Current");
+    value->setIcon("bolt.svg");
     value->setShowUnits(true);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "GroundSpeed");
-    value->setIcon("arrow-simple-right.svg");
+    value->setIcon("fast-forward.svg");
     value->setText(value->fact()->shortDescription());
     value->setShowUnits(true);
-
-
-    if (includeFWValues) {
-        rowIndex    = 0;
-        column      = factValueGrid.columns()->value<QmlObjectListModel*>(2);
-
-        value = column->value<InstrumentValueData*>(rowIndex++);
-        value->setFact("Vehicle", "AirSpeed");
-        value->setText("AirSpd");
-        value->setShowUnits(true);
-
-        value = column->value<InstrumentValueData*>(rowIndex++);
-        value->setFact("Vehicle", "ThrottlePct");
-        value->setText("Thr");
-        value->setShowUnits(true);
-    }
-
-    rowIndex    = 0;
-    column      = factValueGrid.columns()->value<QmlObjectListModel*>(includeFWValues ? 3 : 2);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "FlightTime");
     value->setIcon("timer.svg");
     value->setText(value->fact()->shortDescription());
     value->setShowUnits(false);
-
-    value = column->value<InstrumentValueData*>(rowIndex++);
-    value->setFact("Vehicle", "FlightDistance");
-    value->setIcon("travel-walk.svg");
-    value->setText(value->fact()->shortDescription());
-    value->setShowUnits(true);
 }
 
 QQmlApplicationEngine* QGCCorePlugin::createQmlApplicationEngine(QObject* parent)
@@ -464,14 +439,15 @@ QList<int> QGCCorePlugin::firstRunPromptStdIds(void)
 
 QList<int> QGCCorePlugin::firstRunPromptCustomIds(void)
 {
-    return QList<int>();
+    QList<int> rgStdIds = { araceFirstRunPromptId };
+    return rgStdIds;
 }
 
 QVariantList QGCCorePlugin::firstRunPromptsToShow(void)
 {
     QList<int> rgIdsToShow;
 
-    rgIdsToShow.append(firstRunPromptStdIds());
+    // rgIdsToShow.append(firstRunPromptStdIds());
     rgIdsToShow.append(firstRunPromptCustomIds());
 
     QList<int> rgAlreadyShownIds = AppSettings::firstRunPromptsIdsVariantToList(_toolbox->settingsManager()->appSettings()->firstRunPromptIdsShown()->rawValue());

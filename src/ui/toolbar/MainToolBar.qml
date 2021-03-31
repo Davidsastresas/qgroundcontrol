@@ -62,7 +62,7 @@ Rectangle {
         anchors.bottomMargin:   1
         anchors.top:            parent.top
         anchors.bottom:         parent.bottom
-        spacing:                ScreenTools.defaultFontPixelWidth / 2
+        spacing:                ScreenTools.defaultFontPixelWidth
 
         QGCToolBarButton {
             id:                     currentButton
@@ -70,6 +70,14 @@ Rectangle {
             icon.source:            "/res/AraceIcon.png"
             logo:                   true
             onClicked:              mainWindow.showToolSelectDialog()
+
+            Rectangle {
+                width: currentButton.width
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                color: "white"
+                z: currentButton.z - 1
+            }
         }
 
         MainStatusIndicator {

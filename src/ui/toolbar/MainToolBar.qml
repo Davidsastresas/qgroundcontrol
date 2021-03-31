@@ -71,13 +71,13 @@ Rectangle {
             logo:                   true
             onClicked:              mainWindow.showToolSelectDialog()
 
-            Rectangle {
-                width: currentButton.width
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                color: "white"
-                z: currentButton.z - 1
-            }
+            // Rectangle {
+            //     width: currentButton.width
+            //     anchors.top: parent.top
+            //     anchors.bottom: parent.bottom
+            //     color: "white"
+            //     z: currentButton.z - 1
+            // }
         }
 
         MainStatusIndicator {

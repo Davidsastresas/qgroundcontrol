@@ -70,28 +70,28 @@
     "name":             "altitudeRelative",
     "shortDesc": "Alt (Rel)",
     "type":             "double",
-    "decimalPlaces":    1,
+    "decimalPlaces":    0,
     "units":            "m"
 },
 {
     "name":             "altitudeAMSL",
     "shortDesc": "Alt (AMSL)",
     "type":             "double",
-    "decimalPlaces":    1,
+    "decimalPlaces":    0,
     "units":            "m"
 },
 {
     "name":             "flightDistance",
     "shortDesc": "Flight Distance",
     "type":             "double",
-    "decimalPlaces":    1,
+    "decimalPlaces":    0,
     "units":            "m"
 },
 {
     "name":             "distanceToHome",
     "shortDesc": "Distance to Home",
     "type":             "double",
-    "decimalPlaces":    1,
+    "decimalPlaces":    0,
     "units":            "m"
 },
 {
@@ -105,7 +105,7 @@
     "name":             "distanceToGCS",
     "shortDesc": "Distance to GCS",
     "type":             "double",
-    "decimalPlaces":    1,
+    "decimalPlaces":    0,
     "units":            "m"
 },
 {

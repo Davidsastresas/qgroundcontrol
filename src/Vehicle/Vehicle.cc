@@ -3479,8 +3479,8 @@ void Vehicle::_handleADSBVehicle(const mavlink_message_t& message)
 void Vehicle::_updateDistanceHeadingToHome()
 {
     if (coordinate().isValid() && homePosition().isValid()) {
-        _distanceToHomeFact.setRawValue(coordinate().distanceTo(homePosition()));
-        if (_distanceToHomeFact.rawValue().toDouble() > 1.0) {
+        _distanceToHomeFact.setRawValue(coordinate().distanceTo(homePosition()) * 0.001);
+        if (_distanceToHomeFact.rawValue().toDouble() > 0.001) {
             _headingToHomeFact.setRawValue(coordinate().azimuthTo(homePosition()));
         } else {
             _headingToHomeFact.setRawValue(qQNaN());
@@ -3523,7 +3523,7 @@ void Vehicle::_updateDistanceToGCS()
 {
     QGeoCoordinate gcsPosition = _toolbox->qgcPositionManager()->gcsPosition();
     if (coordinate().isValid() && gcsPosition.isValid()) {
-        _distanceToGCSFact.setRawValue(coordinate().distanceTo(gcsPosition));
+        _distanceToGCSFact.setRawValue(coordinate().distanceTo(gcsPosition) * 0.001);
     } else {
         _distanceToGCSFact.setRawValue(qQNaN());
     }

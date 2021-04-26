@@ -288,7 +288,11 @@ QString QGCCorePlugin::showAdvancedUIMessage() const
               "You should do so only if instructed by customer support. "
               "Are you sure you want to enable Advanced Mode?");
 }
-
+    // value->setRangeType(InstrumentValueData::RangeType::ColorRange);
+    // QVariantList list = { 5.0, 10.0 };
+    // QVariantList colorList = { "red", "green" , "yellow" };
+    // value->setRangeValues(list);
+    // value->setRangeColors(colorList);
 void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSettingsGroup)
 {
     HorizontalFactValueGrid factValueGrid(defaultSettingsGroup);
@@ -299,26 +303,29 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSet
     factValueGrid.appendColumn();
     factValueGrid.appendRow();
     factValueGrid.appendRow();
+    factValueGrid.appendRow();
 
     int                 rowIndex    = 0;
     QmlObjectListModel* column      = factValueGrid.columns()->value<QmlObjectListModel*>(0);
 
     InstrumentValueData* value = column->value<InstrumentValueData*>(rowIndex++);
-    value->setFact("Vehicle", "AltitudeRelative");
-    value->setIcon("arrow-thick-up.svg");
-    value->setText(value->fact()->shortDescription());
-    value->setShowUnits(true);
+    value->setFact("Vehicle", "FlightTime");
+    value->setIcon("time.svg");
+    value->setShowUnits(false);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
-    value->setFact("Vehicle", "DistanceToHome");
-    value->setIcon("home.svg");
-    value->setText(value->fact()->shortDescription());
+    value->setFact("Vehicle", "AltitudeRelative");
+    value->setIcon("arrow-thick-up.svg");
     value->setShowUnits(true);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "FlightDistance");
     value->setIcon("swap.svg");
-    value->setText(value->fact()->shortDescription());
+    value->setShowUnits(true);
+
+    value = column->value<InstrumentValueData*>(rowIndex++);
+    value->setFact("Vehicle", "DistanceToHome");
+    value->setIcon("library.svg");
     value->setShowUnits(true);
 
     rowIndex    = 0;
@@ -327,19 +334,38 @@ void QGCCorePlugin::factValueGridCreateDefaultSettings(const QString& defaultSet
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Battery0", "Current");
     value->setIcon("bolt.svg");
+    value->setRangeType(InstrumentValueData::RangeType::ColorRange);
+    QVariantList list = { 15.0, 20.0 };
+    QVariantList colorList = { "black", "gold" , "red" };
+    value->setRangeValues(list);
+    value->setRangeColors(colorList);
+    value->setShowUnits(true);
+
+    value = column->value<InstrumentValueData*>(rowIndex++);
+    value->setFact("Vehicle", "AirSpeed");
+    value->setIcon("airplane.svg");
+    value->setRangeType(InstrumentValueData::RangeType::ColorRange);
+    list = { 18.0 };
+    colorList = { "black", "red" };
+    value->setRangeValues(list);
+    value->setRangeColors(colorList);
     value->setShowUnits(true);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
     value->setFact("Vehicle", "GroundSpeed");
     value->setIcon("fast-forward.svg");
-    value->setText(value->fact()->shortDescription());
     value->setShowUnits(true);
 
     value = column->value<InstrumentValueData*>(rowIndex++);
-    value->setFact("Vehicle", "FlightTime");
-    value->setIcon("timer.svg");
-    value->setText(value->fact()->shortDescription());
-    value->setShowUnits(false);
+    value->setFact("Wind", "Speed");
+    value->setIcon("flag.svg");
+    value->setRangeType(InstrumentValueData::RangeType::ColorRange);
+    list = { 12.0, 15.0 };
+    colorList = { "black", "gold" , "red" };
+    value->setRangeValues(list);
+    value->setRangeColors(colorList);
+    value->setShowUnits(true);
+
 }
 
 QQmlApplicationEngine* QGCCorePlugin::createQmlApplicationEngine(QObject* parent)
